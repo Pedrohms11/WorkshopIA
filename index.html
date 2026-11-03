@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intranet - Minha Empresa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .card h1 {
+            font-size: 22px;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .btn:hover {
+            background: #004494;
+        }
+
+        .btn-admin {
+            background: #b30000;
+            margin-top: 16px;
+        }
+
+        .btn-admin:hover {
+            background: #8a0000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .welcome-box {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .welcome-box h2 {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .welcome-box p {
+            font-size: 15px;
+            color: #555;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #ccc;
+            text-align: center;
+            padding: 16px;
+            font-size: 13px;
+        }
+
+        /* COMENTÁRIO DE SUPORTE - EQUIPE DE MANUTENÇÃO */
+        /* Suporte técnico: suporte@minhaempresa.com | Telefone: (31) 99999-0000 */
+    </style>
+</head>
+<body>
+    <!-- TELA DE LOGIN -->
+    <div class="container" id="tela-login">
+        <div class="card">
+            <h1>Acesso à Intranet</h1>
+            <form id="form-login">
+                <div class="form-group">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                </div>
+                <!-- Campo oculto de perfil -->
+                <input type="hidden" name="perfil" id="perfil" value="visitante">
+                <button type="submit" class="btn">Entrar</button>
+                <button type="button" id="btn-admin" class="btn btn-admin hidden">Painel Admin</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TELA DE BOAS-VINDAS (inicialmente oculta) -->
+    <div class="container hidden" id="tela-boas-vindas">
+        <div class="welcome-box">
+            <h2 id="boas-vindas">Bem-vindo!</h2>
+            <p>Você está acessando a intranet da Minha Empresa.</p>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <p>&copy; 2025 Minha Empresa. Todos os direitos reservados.</p>
+        <!-- Suporte técnico: suporte@minhaempresa.com | Telefone: (31) 99999-0000 -->
+    </footer>
+
+    <script>
+        // ============================================================
+        // ATENÇÃO: CÓDIGO COM PRÁTICAS INSEGURAS - USO DIDÁTICO
+        // ============================================================
+
+        // Lê o campo oculto de perfil e mostra o botão admin se for "admin"
+        var perfil = document.getElementById('perfil').value;
+        if (perfil === 'admin') {
+            document.getElementById('btn-admin').classList.remove('hidden');
+        }
+
+        // Manipula o envio do formulário de login
+        document.getElementById('form-login').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var usuario = document.getElementById('usuario').value;
+            var senha = document.getElementById('senha').value;
+            var perfilAtual = document.getElementById('perfil').value;
+
+            // Envia os dados via fetch para o endpoint fictício
+            fetch('https://api.minhaempresa.com/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    usuario: usuario,
+                    senha: senha,
+                    perfil: perfilAtual
+                })
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                alert('Login realizado');
+                // Redireciona para a tela de boas-vindas com o nome na URL
+                window.location.href = window.location.pathname + '?nome=' + encodeURIComponent(usuario);
+            })
+            .catch(function (error) {
+                // Mesmo em caso de erro, exibe o alerta (simulação didática)
+                alert('Login realizado');
+                window.location.href = window.location.pathname + '?nome=' + encodeURIComponent(usuario);
+            });
+        });
+
+        // Verifica se há parâmetro ?nome= na URL e exibe a tela de boas-vindas
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var nome = params.get('nome');
+
+            if (nome) {
+                document.getElementById('tela-login').classList.add('hidden');
+                document.getElementById('tela-boas-vindas').classList.remove('hidden');
+
+                // ⚠️ PRÁTICA INSEGURA: innerHTML com dado vindo da URL (XSS refletido)
+                document.getElementById('boas-vindas').innerHTML =
+                    'Bem-vindo, <strong>' + nome + '</strong>!';
+            }
+        })();
+    </script>
+</body>
+</html>
