@@ -7,7 +7,7 @@
 
 ## 📖 Sobre este guia
 
-Este repositório reúne o conteúdo, as demonstrações e as reflexões do workshop sobre riscos no uso de Inteligência Artificial. O objetivo não é ensinar a "usar IA", mas ensinar a **validar** o que a IA produz — e a reconhecer os riscos que passam despercebidos no dia a dia do desenvolvimento.
+Este repositório reúne o conteúdo, as demonstrações e as reflexões do workshop ministrado no evento mundo senai na unidade CFP Afonso greco, ministrado por mim sobre riscos no uso de Inteligência Artificial. O objetivo não é ensinar a "usar IA", mas ensinar a **validar** o que a IA produz — e a reconhecer os riscos que passam despercebidos no dia a dia do desenvolvimento.
 
 A IA não é vilã. Também não é oráculo. Ela erra com confiança, aprende com dados enviesados, age sem supervisão e pode ser usada para distorcer a realidade. Este guia organiza esses riscos em uma escada — do invisível ao absurdo — e oferece práticas concretas para mitigá-los.
 
