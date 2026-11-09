@@ -154,6 +154,7 @@ Quatro casos para discussão em grupo. Para cada um, responda:
 - **Prompt de geração de página didática** com vulnerabilidades (com estratégia de fragmentação caso haja recusa do modelo).
 - **Análise manual do código** com apontamento exato de cada falha.
 - **Slides de vulnerabilidades enumeradas** com localização no código e demonstração via DevTools/código-fonte.
+- **Slides de apresentação** link: "https://canva.link/d8wanb6bnlyvo6l".
 
 ---
 
